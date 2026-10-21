@@ -21,6 +21,15 @@ node scripts/make-icon.mjs         # regenerates src/app/icon.svg from the "done
 ```
 Snapshots are made with `claude-buddy snapshot FILE.png [wait|done] [AGE]`.
 
+## Backdrop
+The fixed night-forest scene behind the page is pixel art drawn by `scripts/make-backdrop.mjs`
+(480x270, ~23 colours, seeded so re-runs are byte-identical) and scaled up with
+`image-rendering: pixelated` by `src/components/Backdrop.tsx`, which also draws the CSS fireflies.
+The art is kept low in value so the copy stays WCAG AA over every pixel.
+```bash
+node scripts/make-backdrop.mjs     # regenerates public/backdrop.png
+```
+
 ## Build setup
 The Tailwind/Turbopack setup in `next.config.ts` came from the Next.js scaffold; nothing else is customised.
 
