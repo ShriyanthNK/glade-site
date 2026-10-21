@@ -60,30 +60,30 @@ export function MockDesktop() {
           role="img"
           aria-label="Mock terminal: Claude Code refactoring an auth middleware, then finishing"
         >
-          {LINES.slice(0, shown).map((l) => (
-            <span key={l} aria-hidden className="block">{l}</span>
+          {LINES.map((l, i) => (
+            <span key={l} aria-hidden className={i < shown ? "block" : "hidden motion-reduce:block"}>{l}</span>
           ))}
-          {!done && <span aria-hidden className="block text-sparkle">working...</span>}
-          {done && <span aria-hidden className="block text-sprout">done</span>}
+          {!done && <span aria-hidden className="block text-sparkle motion-reduce:hidden">working...</span>}
+          <span aria-hidden className={`text-sprout ${done ? "block" : "hidden motion-reduce:block"}`}>done</span>
         </div>
       </div>
 
       {/* Mochi: bottom-anchored, slides up from the bottom edge */}
       <div
-        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center gap-4 transition-transform duration-500 ease-out min-[420px]:scale-75 sm:right-8 sm:scale-100 ${done ? "translate-y-0" : "translate-y-[120%]"}`}
+        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center gap-4 transition-transform duration-500 ease-out min-[420px]:scale-75 sm:right-8 sm:scale-100 motion-reduce:translate-y-0 motion-reduce:transition-none ${done ? "translate-y-0" : "translate-y-[120%]"}`}
       >
         <div aria-hidden className="relative z-10">
           <Bubble title={m.title} />
         </div>
-        <PixelSprite mood="done" scale={6} className="mochi-bob" title="Mochi" />
+        <PixelSprite mood="done" scale={6} className="mochi-bob" title={done ? "Mochi" : undefined} />
       </div>
       {/* Narrow live region: only the bubble text is announced */}
-      <p role="status" className="sr-only">{done ? m.title.toLowerCase() : ""}</p>
+      <p role="status" className="sr-only">{done ? m.title : ""}</p>
 
       <button
         type="button"
         onClick={() => setRun((r) => r + 1)}
-        className="absolute bottom-4 left-4 border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
+        className="absolute bottom-4 left-4 motion-reduce:hidden border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
       >
         Replay
       </button>

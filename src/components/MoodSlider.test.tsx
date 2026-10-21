@@ -24,4 +24,24 @@ describe("MoodSlider", () => {
     expect(screen.getByRole("slider")).toBeDisabled();
     expect(screen.getByRole("button", { name: /claude finished/i })).toHaveAttribute("aria-pressed", "true");
   });
+
+  it("shows the wait body copy and valuetext", () => {
+    render(<MoodSlider />);
+    expect(screen.getByText(/Claude needs your permission to use Bash/)).toBeInTheDocument();
+    const slider = screen.getByRole("slider");
+    fireEvent.change(slider, { target: { value: "12" } });
+    expect(slider).toHaveAttribute("aria-valuetext", "12 seconds");
+  });
+
+  it("re-enables the slider when finished is toggled off", () => {
+    render(<MoodSlider />);
+    const slider = screen.getByRole("slider");
+    fireEvent.change(slider, { target: { value: String(MAX_WAIT_SECONDS) } });
+    const btn = screen.getByRole("button", { name: /claude finished/i });
+    fireEvent.click(btn);
+    expect(slider).toBeDisabled();
+    fireEvent.click(btn);
+    expect(slider).toBeEnabled();
+    expect(screen.getByText("HELLOOO? CLAUDE NEEDS YOU")).toBeInTheDocument();
+  });
 });

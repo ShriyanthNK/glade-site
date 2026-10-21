@@ -21,16 +21,17 @@ export function MoodSlider() {
           max={MAX_WAIT_SECONDS}
           step={1}
           value={age}
+          aria-valuetext={`${age} seconds`}
           disabled={done}
           onChange={(e) => setAge(Number(e.target.value))}
           className="mt-4 w-full accent-[var(--sparkle)] disabled:opacity-40"
         />
-        <p className="mt-2 font-mono text-sm" aria-hidden>{done ? "finished" : `${age}s`}</p>
+        <p className="mt-2 text-sm" aria-hidden>{done ? "finished" : `${age}s`}</p>
         <button
           type="button"
           aria-pressed={done}
           onClick={() => setDone((d) => !d)}
-          className="mt-6 border-4 border-paper px-4 py-2 font-mono text-sm font-extrabold aria-pressed:bg-paper aria-pressed:text-outline"
+          className="mt-6 border-4 border-paper px-4 py-2 text-sm font-extrabold aria-pressed:bg-paper aria-pressed:text-outline"
         >
           Claude finished
         </button>
