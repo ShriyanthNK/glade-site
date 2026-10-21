@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 const Cmd = ({ children }: { children: ReactNode }) => (
-  <code className="font-mono font-extrabold text-sprout">{children}</code>
+  <code className="bg-ink/85 px-1 font-mono font-extrabold text-sprout">{children}</code>
 );
 
 const FAQ: [string, ReactNode][] = [
