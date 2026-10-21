@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/Footer";
-import { PixelSprite } from "@/components/PixelSprite";
+import { AnimatedMochi } from "@/components/AnimatedMochi";
 
 export default function NotFound() {
   return (
     <>
       <Nav />
       <main className="mx-auto flex min-h-[50vh] max-w-6xl flex-col items-start justify-center gap-5 px-5 py-8">
-        <PixelSprite mood="annoyed" scale={6} className="mochi-bob" />
+        <AnimatedMochi mood="annoyed" scale={6} />
         <h1 className="max-w-3xl text-balance text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-7xl">
           Mochi can&apos;t find that page.
         </h1>

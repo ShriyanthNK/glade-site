@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+// @ts-expect-error pngjs (dev dependency) ships no type declarations
 import { PNG } from "pngjs";
 import { MOCHI_ENTER, MOCHI_LOOPS, type MochiSheet } from "./mochi-animation.generated";
 

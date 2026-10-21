@@ -1,5 +1,5 @@
 import { siteConfig } from "../../../site.config";
-import { PixelSprite } from "../PixelSprite";
+import { AnimatedMochi } from "../AnimatedMochi";
 
 export function FinalCta() {
   return (
@@ -13,7 +13,7 @@ export function FinalCta() {
             Download for Mac
           </a>
         </div>
-        <PixelSprite mood="done" scale={8} className="mochi-bob" title="Mochi waving" />
+        <AnimatedMochi mood="done" scale={8} title="Mochi waving" />
       </div>
     </section>
   );

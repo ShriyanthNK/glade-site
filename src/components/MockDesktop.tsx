@@ -1,12 +1,16 @@
 "use client";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { preload } from "react-dom";
 import { Bubble } from "./Bubble";
 import { MOODS } from "@/lib/moods";
-import { PixelSprite } from "./PixelSprite";
-import { SPRITES } from "@/lib/sprites";
+import { AnimatedMochi } from "./AnimatedMochi";
+import { MOCHI_ENTER, MOCHI_LOOPS } from "@/lib/mochi-animation.generated";
 
-// Mochi is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm up.
-const SM_SCALE = 8;
+// Mochi is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm
+// up: 1.5 and 2 CSS px per sheet px (the sheets hold 4 sheet px per art pixel).
+// The bubble's 24px tail is zoomed with the bubble (.7 at sm, .8 from 900px), and Mochi's frame
+// is pulled up under it so the tail tip sits where the app's tail points.
+const TIP_Y = MOCHI_LOOPS.done.bubbleTip?.y ?? 0;
 
 const LINES = [
   "> refactor the auth middleware",
@@ -29,6 +33,9 @@ export function MockDesktop() {
   const [run, setRun] = useState(0);
   const [phase, setPhase] = useState<"working" | "done">("working");
   const [shown, setShown] = useState(0);
+  const [mochiPhase, setMochiPhase] = useState<"enter" | "loop">("enter");
+  preload(MOCHI_ENTER.src, { as: "image" });
+  preload(MOCHI_LOOPS.done.src, { as: "image" });
 
   useEffect(() => {
     if (reduced) return;
@@ -76,27 +83,31 @@ export function MockDesktop() {
         </div>
       </div>
 
-      {/* Mochi: bottom-anchored, slides up from the bottom edge */}
+      {/* Mochi: bottom-anchored; once Claude is done he plays the app's entrance (rising from the
+          bottom edge with confetti), the bubble pops in and types, then the done loop runs. */}
       <div
-        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center gap-4 transition-transform duration-500 ease-out min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 motion-reduce:translate-y-0 motion-reduce:transition-none ${done ? "translate-y-0" : "translate-y-[120%]"}`}
+        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center [--mochi-scale-px:1.5px] [--mochi-tail:24px] min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 sm:[--mochi-scale-px:2px] sm:[--mochi-tail:16.8px] min-[900px]:[--mochi-tail:19.2px] ${done ? "" : "invisible motion-reduce:visible"}`}
       >
-        <div aria-hidden className="relative z-10 sm:[zoom:.7] min-[900px]:[zoom:.8]">
-          <Bubble title={m.title} />
+        <div key={`b${run}-${done}`} aria-hidden className="relative z-10 sm:[zoom:.7] min-[900px]:[zoom:.8]">
+          <Bubble title={m.title} reveal={done && !reduced} />
         </div>
-        <PixelSprite
-          mood="done"
-          scale={6}
-          className="mochi-bob sm:h-[var(--sm-h)] sm:w-[var(--sm-w)]"
-          style={{ "--sm-w": `${SPRITES.done.width * SM_SCALE}px`, "--sm-h": `${SPRITES.done.height * SM_SCALE}px` } as React.CSSProperties}
-          title={done ? "Mochi" : undefined}
-        />
+        <div className="relative z-20" style={{ marginTop: `calc(var(--mochi-tail) - ${TIP_Y} * var(--mochi-scale-px))` }}>
+          <AnimatedMochi
+            key={`m${run}-${done}`}
+            mood="done"
+            scale={6}
+            phase={done ? mochiPhase : "loop"}
+            onEnterEnd={() => setMochiPhase("loop")}
+            title={done ? "Mochi" : undefined}
+          />
+        </div>
       </div>
       {/* Narrow live region: only the bubble text is announced */}
       <p role="status" className="sr-only">{done ? m.title : ""}</p>
 
       <button
         type="button"
-        onClick={() => { setPhase("working"); setShown(0); setRun((r) => r + 1); }}
+        onClick={() => { setPhase("working"); setShown(0); setMochiPhase("enter"); setRun((r) => r + 1); }}
         className="absolute bottom-4 left-4 motion-reduce:hidden border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
       >
         Replay
