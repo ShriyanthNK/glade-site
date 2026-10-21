@@ -4,8 +4,8 @@ import { PixelSprite } from "./PixelSprite";
 
 interface Props { mood: MoodId; project?: string; scale?: number; bob?: boolean }
 
-// Sprite top sits 16px below the bubble box, so the 24px tail overlaps it by 8px;
-// matches the app snapshots (sign tops have no outline, bubble stays above in z-order).
+// Sprite top sits 16px below the bubble box: the 24px tail overlaps the sprite top by 8px,
+// and the sign top sits flush below the bubble border, as in the app snapshots.
 const GAP_CLASS = "mt-4";
 
 export function MochiStage({ mood, project, scale = 8, bob = true }: Props) {
