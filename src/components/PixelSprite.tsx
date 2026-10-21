@@ -1,9 +1,9 @@
 import type { MoodId } from "@/lib/moods";
 import { PALETTE, SPRITES, spriteToRects } from "@/lib/sprites";
 
-interface Props { mood: MoodId; scale?: number; className?: string; title?: string }
+interface Props { mood: MoodId; scale?: number; className?: string; style?: React.CSSProperties; title?: string }
 
-export function PixelSprite({ mood, scale = 8, className, title }: Props) {
+export function PixelSprite({ mood, scale = 8, className, style, title }: Props) {
   const frame = SPRITES[mood];
   const rects = spriteToRects(frame, PALETTE);
   return (
@@ -16,6 +16,7 @@ export function PixelSprite({ mood, scale = 8, className, title }: Props) {
       viewBox={`0 0 ${frame.width} ${frame.height}`}
       shapeRendering="crispEdges"
       className={className}
+      style={style}
     >
       {rects.map((r, i) => (
         <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} fill={r.fill} />

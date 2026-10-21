@@ -3,6 +3,10 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Bubble } from "./Bubble";
 import { MOODS } from "@/lib/moods";
 import { PixelSprite } from "./PixelSprite";
+import { SPRITES } from "@/lib/sprites";
+
+// Mochi is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm up.
+const SM_SCALE = 8;
 
 const LINES = [
   "> refactor the auth middleware",
@@ -38,7 +42,7 @@ export function MockDesktop() {
   const visible = reduced ? LINES.length : shown;
   return (
     <div
-      className="relative mx-auto aspect-[4/5] w-full max-w-3xl overflow-hidden rounded-2xl border-4 border-outline shadow-2xl sm:aspect-[16/10]"
+      className="relative mx-auto aspect-[4/5] w-full max-w-3xl overflow-hidden rounded-2xl border-4 border-outline shadow-2xl sm:aspect-[16/11]"
       style={{ background: "linear-gradient(135deg, #5a3d6e 0%, #3a2a47 55%, #2c2038 100%)" }}
     >
       {/* macOS menu bar */}
@@ -74,12 +78,18 @@ export function MockDesktop() {
 
       {/* Mochi: bottom-anchored, slides up from the bottom edge */}
       <div
-        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center gap-4 transition-transform duration-500 ease-out min-[420px]:scale-75 sm:right-8 sm:scale-100 motion-reduce:translate-y-0 motion-reduce:transition-none ${done ? "translate-y-0" : "translate-y-[120%]"}`}
+        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center gap-4 transition-transform duration-500 ease-out min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 motion-reduce:translate-y-0 motion-reduce:transition-none ${done ? "translate-y-0" : "translate-y-[120%]"}`}
       >
-        <div aria-hidden className="relative z-10">
+        <div aria-hidden className="relative z-10 sm:[zoom:.7] min-[900px]:[zoom:.8]">
           <Bubble title={m.title} />
         </div>
-        <PixelSprite mood="done" scale={6} className="mochi-bob" title={done ? "Mochi" : undefined} />
+        <PixelSprite
+          mood="done"
+          scale={6}
+          className="mochi-bob sm:h-[var(--sm-h)] sm:w-[var(--sm-w)]"
+          style={{ "--sm-w": `${SPRITES.done.width * SM_SCALE}px`, "--sm-h": `${SPRITES.done.height * SM_SCALE}px` } as React.CSSProperties}
+          title={done ? "Mochi" : undefined}
+        />
       </div>
       {/* Narrow live region: only the bubble text is announced */}
       <p role="status" className="sr-only">{done ? m.title : ""}</p>
