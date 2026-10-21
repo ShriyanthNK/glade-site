@@ -112,3 +112,35 @@ body { font-family: var(--font-bricolage), system-ui, sans-serif; line-height: 1
 
 @keyframes mochi-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .mochi-bob { animation: mochi-bob 1.6s steps(2, jump-none) infinite; }
+
+/* Mochi as captured from the app (src/components/AnimatedMochi.tsx). --mochi-px is CSS px per
+   sheet px; a parent may set --mochi-scale-px to resize him per breakpoint. The box is the loop
+   frame; the sheet is anchored bottom-centre and may be taller (the entrance). */
+.mochi-anim {
+  --mochi-px: var(--mochi-scale-px, var(--mochi-px-base));
+  position: relative;
+  flex: none;
+  width: calc(var(--mochi-box-w) * var(--mochi-px));
+  height: calc(var(--mochi-box-h) * var(--mochi-px));
+}
+.mochi-anim-sheet {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(var(--mochi-fw) * var(--mochi-px));
+  height: calc(var(--mochi-fh) * var(--mochi-px));
+  background-image: var(--mochi-src);
+  background-repeat: no-repeat;
+  background-size: calc(var(--mochi-fw) * var(--mochi-n) * var(--mochi-px)) 100%;
+  image-rendering: pixelated;
+  /* resting frame: what shows when animations are off (reduced motion) */
+  background-position: calc(var(--mochi-rest) * var(--mochi-fw) * var(--mochi-px) * -1) 0;
+  pointer-events: none;
+}
+.mochi-anim-sheet:not([data-mochi-sheet="static"]) {
+  animation: mochi-frames var(--mochi-dur) steps(var(--mochi-n), end) var(--mochi-iter);
+}
+@keyframes mochi-frames {
+  from { background-position: 0 0; }
+  to { background-position: calc(var(--mochi-fw) * var(--mochi-n) * var(--mochi-px) * -1) 0; }
+}
