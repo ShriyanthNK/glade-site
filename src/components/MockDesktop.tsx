@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Bubble } from "./Bubble";
 import { MOODS } from "@/lib/moods";
 import { PixelSprite } from "./PixelSprite";
@@ -11,27 +11,31 @@ const LINES = [
   "Running tests... 42 passed",
 ];
 
+const RM_QUERY = "(prefers-reduced-motion: reduce)";
+function subscribeReduced(cb: () => void) {
+  const mq = window.matchMedia(RM_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+const getReduced = () => window.matchMedia(RM_QUERY).matches;
+const getReducedServer = () => false;
+
 export function MockDesktop() {
+  const reduced = useSyncExternalStore(subscribeReduced, getReduced, getReducedServer);
   const [run, setRun] = useState(0);
   const [phase, setPhase] = useState<"working" | "done">("working");
   const [shown, setShown] = useState(0);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setShown(LINES.length);
-      setPhase("done");
-      return;
-    }
-    setPhase("working");
-    setShown(0);
+    if (reduced) return;
     const timers = LINES.map((_, i) => window.setTimeout(() => setShown(i + 1), 500 + i * 550));
     timers.push(window.setTimeout(() => setPhase("done"), 500 + LINES.length * 550 + 300));
     return () => timers.forEach(clearTimeout);
-  }, [run]);
+  }, [run, reduced]);
 
   const m = MOODS.done;
-  const done = phase === "done";
+  const done = reduced || phase === "done";
+  const visible = reduced ? LINES.length : shown;
   return (
     <div
       className="relative mx-auto aspect-[4/5] w-full max-w-3xl overflow-hidden rounded-2xl border-4 border-outline shadow-2xl sm:aspect-[16/10]"
@@ -61,7 +65,7 @@ export function MockDesktop() {
           aria-label="Mock terminal: Claude Code refactoring an auth middleware, then finishing"
         >
           {LINES.map((l, i) => (
-            <span key={l} aria-hidden className={i < shown ? "block" : "hidden motion-reduce:block"}>{l}</span>
+            <span key={l} aria-hidden className={i < visible ? "block" : "hidden motion-reduce:block"}>{l}</span>
           ))}
           {!done && <span aria-hidden className="block text-sparkle motion-reduce:hidden">working...</span>}
           <span aria-hidden className={`text-sprout ${done ? "block" : "hidden motion-reduce:block"}`}>done</span>
@@ -82,7 +86,7 @@ export function MockDesktop() {
 
       <button
         type="button"
-        onClick={() => setRun((r) => r + 1)}
+        onClick={() => { setPhase("working"); setShown(0); setRun((r) => r + 1); }}
         className="absolute bottom-4 left-4 motion-reduce:hidden border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
       >
         Replay

@@ -44,4 +44,15 @@ describe("MoodSlider", () => {
     expect(slider).toBeEnabled();
     expect(screen.getByText("HELLOOO? CLAUDE NEEDS YOU")).toBeInTheDocument();
   });
+
+  it("announces the mood through a single narrow status region", () => {
+    render(<MoodSlider />);
+    const status = screen.getByRole("status");
+    expect(status).toHaveTextContent("Claude's waiting on you");
+    fireEvent.change(screen.getByRole("slider"), { target: { value: String(MAX_WAIT_SECONDS) } });
+    expect(status).toHaveTextContent("Hellooo? Claude needs you");
+    fireEvent.click(screen.getByRole("button", { name: /claude finished/i }));
+    expect(status).toHaveTextContent("Claude's done, your turn");
+    expect(document.querySelector("[aria-live]")).toBeNull();
+  });
 });

@@ -1,4 +1,5 @@
-import { spriteToRects } from "./sprites";
+import { PALETTE, SPRITES, spriteToRects } from "./sprites";
+import type { MoodId } from "./moods";
 
 const palette = { o: "#000000", p: "#ffffff" };
 
@@ -14,4 +15,18 @@ describe("spriteToRects", () => {
   it("throws on an unknown palette char", () => {
     expect(() => spriteToRects({ width: 1, height: 1, rows: ["z"] }, palette)).toThrow(/z/);
   });
+});
+
+describe("SPRITES integrity", () => {
+  for (const id of Object.keys(SPRITES) as MoodId[]) {
+    it(`${id} is rectangular and uses known palette chars`, () => {
+      const f = SPRITES[id];
+      expect(f.rows.length).toBe(f.height);
+      f.rows.forEach((row) => {
+        expect(row.length).toBe(f.width);
+        for (const ch of row) expect(ch === "." || ch in PALETTE).toBe(true);
+      });
+      expect(() => spriteToRects(f, PALETTE)).not.toThrow();
+    });
+  }
 });

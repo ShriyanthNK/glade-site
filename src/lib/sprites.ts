@@ -14,11 +14,10 @@ export const PALETTE: Record<string, string> = {
   g: "#62c46d", // sprout light
   d: "#2f8f4e", // sprout dark
   b: "#ff8fa3", // blush
-  r: "#ff4d5e", // alert red (angry blush, sign marks)
+  r: "#ff4d5e", // sprite's own red (angry blush, sign marks)
   w: "#ffffff", // white
   u: "#6ec6ff", // sweat blue
   y: "#ffd23f", // sparkle
-  t: "#3fd0c0", // teal
   n: "#b8794a", // sign wood
   m: "#b03a52", // mouth dark
   k: "#ff7eb6", // tongue

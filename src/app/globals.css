@@ -27,12 +27,12 @@
   --color-alert: var(--alert);
   --color-sparkle: var(--sparkle);
   --color-blush: var(--blush);
-  --font-display: var(--font-display);
-  --font-mono: var(--font-mono);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-jetbrains);
 }
 
 html { background: var(--ink); color: var(--paper); }
-body { font-family: var(--font-display), system-ui, sans-serif; line-height: 1.55; }
+body { font-family: var(--font-bricolage), system-ui, sans-serif; line-height: 1.55; }
 :focus-visible { outline: 3px solid var(--sparkle); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {

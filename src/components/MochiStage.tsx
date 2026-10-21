@@ -11,10 +11,10 @@ const GAP_CLASS = "mt-4";
 export function MochiStage({ mood, project, scale = 8, bob = true }: Props) {
   const m = MOODS[mood];
   return (
-    <figure className="flex flex-col items-center" aria-live="polite">
+    <figure className="flex flex-col items-center">
       <Bubble className="relative z-10" title={m.title} body={m.body} tone={m.tone} project={project} />
       <div className={`flex items-end justify-center ${GAP_CLASS}`}>
-        <PixelSprite mood={mood} scale={scale} className={bob ? "mochi-bob" : undefined} title={`Mochi, ${m.title.toLowerCase()}`} />
+        <PixelSprite mood={mood} scale={scale} className={bob ? "mochi-bob" : undefined} title="Mochi" />
       </div>
     </figure>
   );
