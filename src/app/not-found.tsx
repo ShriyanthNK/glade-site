@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main className="mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-center gap-6 px-5 py-16">
+      <main className="mx-auto flex min-h-[50vh] max-w-6xl flex-col items-start justify-center gap-5 px-5 py-8">
         <PixelSprite mood="annoyed" scale={6} className="mochi-bob" />
         <h1 className="max-w-3xl text-balance text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-7xl">
           Mochi can&apos;t find that page.
