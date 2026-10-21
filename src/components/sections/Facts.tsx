@@ -6,7 +6,7 @@ const FACTS = [
 
 export function Facts() {
   return (
-    <section aria-label="Quick facts" className="border-y-4 border-outline bg-surface">
+    <section aria-label="Quick facts" className="scrim-band">
       <ul className="mx-auto grid max-w-6xl gap-4 px-5 py-7 sm:grid-cols-3 sm:gap-10">
         {FACTS.map((f) => (
           <li key={f} className="flex items-start gap-3 text-base font-semibold text-paper/90">

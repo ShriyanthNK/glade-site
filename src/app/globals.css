@@ -72,21 +72,32 @@ body { font-family: var(--font-bricolage), system-ui, sans-serif; line-height: 1
     rgb(42 26 38 / 0.15) 100%
   );
 }
+/* Soft ink wash behind sections that used to be solid bands: fades in and out, no hard edge. */
+.scrim-band {
+  background: linear-gradient(
+    to bottom,
+    rgb(42 26 38 / 0) 0,
+    rgb(42 26 38 / 0.4) 56px,
+    rgb(42 26 38 / 0.4) calc(100% - 56px),
+    rgb(42 26 38 / 0) 100%
+  );
+}
 .backdrop-flies { display: block; width: 100%; height: 100%; overflow: visible; }
-.firefly-core { fill: var(--sparkle); }
-.firefly-halo { fill: var(--sparkle); fill-opacity: 0.32; }
+/* Fireflies are a held-down amber, not full sparkle: copy passing over a lit one keeps >= 3:1. */
+.firefly-core { fill: #b4872a; }
+.firefly-halo { fill: #b4872a; fill-opacity: 0.35; }
 .firefly {
-  opacity: 0.9;
+  opacity: 0.6;
   animation-name: firefly-blink, firefly-drift;
   animation-timing-function: steps(1, end), steps(1, end);
   animation-iteration-count: infinite, infinite;
 }
 @keyframes firefly-blink {
-  0%, 50% { opacity: 0.12; }
-  58% { opacity: 0.55; }
-  64%, 80% { opacity: 1; }
-  86% { opacity: 0.55; }
-  92%, 100% { opacity: 0.12; }
+  0%, 50% { opacity: 0.1; }
+  58% { opacity: 0.35; }
+  64%, 80% { opacity: 0.6; }
+  86% { opacity: 0.35; }
+  92%, 100% { opacity: 0.1; }
 }
 @keyframes firefly-drift {
   0%, 100% { transform: translate(0, 0); }

@@ -3,7 +3,7 @@ import { PixelSprite } from "../PixelSprite";
 
 export function FinalCta() {
   return (
-    <section className="border-t-4 border-outline bg-surface">
+    <section className="scrim-band">
       <div className="mx-auto flex max-w-6xl flex-col items-start gap-10 px-5 py-24 md:flex-row md:items-end md:justify-between md:py-32">
         <div>
           <h2 className="max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
