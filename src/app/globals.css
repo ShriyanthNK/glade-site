@@ -11,12 +11,14 @@
   --alert: #c8203a;
   --sparkle: #ffd23f;
   --blush: #ff8fa8;
+  --surface: #33202e;
   --unit: 8px;
 }
 
 @theme inline {
   --color-ink: var(--ink);
   --color-outline: var(--outline);
+  --color-surface: var(--surface);
   --color-paper: var(--paper);
   --color-peach: var(--peach);
   --color-peach-shadow: var(--peach-shadow);

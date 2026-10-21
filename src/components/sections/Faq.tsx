@@ -1,6 +1,12 @@
-const FAQ = [
+import type { ReactNode } from "react";
+
+const Cmd = ({ children }: { children: ReactNode }) => (
+  <code className="font-mono font-extrabold text-sprout">{children}</code>
+);
+
+const FAQ: [string, ReactNode][] = [
   ["Does it work with any Claude Code project?", "Yes. Mochi shows the name of the project that needs you."],
-  ["Can I silence him?", "Yes. `claude-buddy snooze MINUTES|forever|clear`, or `claude-buddy hide`."],
+  ["Can I silence him?", <>Yes. <Cmd>claude-buddy snooze MINUTES|forever|clear</Cmd>, or <Cmd>claude-buddy hide</Cmd>.</>],
   ["Does he nag forever?", "No. He gives up after 3 minutes by default."],
   ["Which macOS versions?", "macOS 13 or later."],
 ];
@@ -19,7 +25,7 @@ export function Faq() {
                 className="relative h-4 w-4 shrink-0 before:absolute before:left-0 before:top-[6px] before:h-1 before:w-4 before:bg-sparkle after:absolute after:left-[6px] after:top-0 after:h-4 after:w-1 after:bg-sparkle group-open:after:hidden"
               />
             </summary>
-            <p className="mt-3 max-w-xl text-paper/80">{a}</p>
+            <p className="mt-3 max-w-xl break-words text-paper/80">{a}</p>
           </details>
         ))}
       </div>

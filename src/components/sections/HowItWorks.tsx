@@ -26,7 +26,7 @@ export function HowItWorks() {
       </ol>
       <div className="mt-24 grid gap-8 md:grid-cols-[1fr_1.6fr] md:gap-16">
         <h3 className="text-3xl font-extrabold tracking-tight">You&apos;re in control</h3>
-        <dl className="divide-y-4 divide-outline border-4 border-outline bg-[#33202e]">
+        <dl className="divide-y-4 divide-outline border-4 border-outline bg-surface">
           {CONTROLS.map(([cmd, what]) => (
             <div key={cmd} className="grid gap-1 p-4 sm:grid-cols-[auto_1fr] sm:items-baseline sm:gap-6">
               <dt className="break-words font-mono text-sm font-extrabold text-sprout">{cmd}</dt>
