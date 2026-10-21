@@ -36,3 +36,6 @@ body { font-family: var(--font-display), system-ui, sans-serif; line-height: 1.5
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+@keyframes mochi-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.mochi-bob { animation: mochi-bob 1.6s steps(2, jump-none) infinite; }
