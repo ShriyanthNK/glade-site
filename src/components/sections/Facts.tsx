@@ -1,6 +1,6 @@
 const FACTS = [
   "Lives in your menu bar, with its own window for settings.",
-  "Photos become pixel art on your Mac. The app has no networking code.",
+  "Crop your photo and pick pixel art or not, all on your Mac. The app has no networking code.",
   "Connects to Claude Code's hooks.",
 ];
 

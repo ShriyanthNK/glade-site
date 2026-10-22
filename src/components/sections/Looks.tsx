@@ -3,8 +3,8 @@ import { siteConfig } from "../../../site.config";
 const BACKDROP = { backgroundImage: "url(/backdrop.png)", backgroundSize: "cover", backgroundPosition: "bottom", imageRendering: "pixelated" as const };
 
 const STEPS = [
-  ["Drop in a photo", "A view, a game screenshot, your cat."],
-  [`${siteConfig.name} makes it pixel art`, `On your Mac. ${siteConfig.name}'s own code has no networking, so it cannot upload your photo.`],
+  ["Drop in a photo", "A view, a game screenshot, your cat. It is fitted to your terminal for you, and you can crop it."],
+  ["Pixel art, or keep it as it is", `You choose. It is all done on your Mac, and ${siteConfig.name}'s own code has no networking, so it cannot upload your photo.`],
   ["Your text stays readable", "It is darkened just enough to keep clear contrast behind the terminal."],
 ];
 
@@ -44,7 +44,7 @@ export function Looks() {
         <h2 className="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">A scene behind your terminal.</h2>
         <p className="max-w-xl text-lg text-paper/80">
           {siteConfig.name} opens Terminal.app in Hoot&apos;s colors with a see-through background and puts a scene behind it.
-          Pick the built-in Night Forest, or make a look from one of your own photos. Choose your terminal font and size too.
+          Pick the built-in Night Forest, or make a look from one of your own photos, cropped the way you like and pixelated or not. Choose your terminal font and size too.
         </p>
       </div>
       <div className="mt-12">

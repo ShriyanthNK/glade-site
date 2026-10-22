@@ -15,7 +15,7 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | Hoot stays away while the terminal is in front and you are typing, and checks again every 3 s | `AlertPolicy`, `Controller.attempt`; `AlertContentTests` |
 | The bubble says what Claude wants ("Run: npm test", "Edit: Views.swift") and, when done, a one-line summary of Claude's last message | `AlertContent`, `MessageTests`; pop-up snapshots |
 | The glowing scene behind the terminal works with Terminal.app today | `SceneryController`, `TerminalProfile`; tested by hand and by `scripts/test-install.sh` (config only) |
-| Photos become pixel art on your Mac and are darkened just enough that text keeps 4.5:1 contrast | `LookPipeline`, `LookPipelineTests` |
+| Photos are fitted to the terminal automatically; you can crop (move the box, drag a corner, zoom) and choose pixel art (480x270, limited palette) or a smooth picture (1280x720); either way it is darkened just enough that text keeps 4.5:1 contrast | `LookPipeline`, `CropRegion`, `CropEditor.swift`, `LookPipelineTests`, `CropRegionTests` |
 | The app contains no networking code | grep of `Sources/` for URLSession, NWConnection etc. (none); source is public |
 | Glade adds five hooks (Notification, PermissionRequest, Stop, UserPromptSubmit, PostToolUse) to Claude Code's settings.json, saves a backup first and only touches its own entries | `HookInstaller`, `HookInstallerTests` |
 | An optional Hoot status line: calm under 60 % context, impatient from 60 %, worried from 85 %; it never overwrites another status line unless asked and restores it when removed | `StatusLine.swift`, `StatusLineTests` |
