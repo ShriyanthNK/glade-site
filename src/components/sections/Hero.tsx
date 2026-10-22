@@ -9,7 +9,7 @@ export function Hero() {
           Stop watching the terminal.
         </h1>
         <p className="mt-6 max-w-xl text-lg text-paper/80">
-          Mochi pops up when Claude Code finishes or needs your OK, then gets out of the way.
+          Hoot pops up when Claude Code finishes or needs your OK, then gets out of the way.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a id="download" href={siteConfig.downloadUrl} className="bg-sparkle px-6 py-3 text-lg font-bold text-outline">

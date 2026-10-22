@@ -5,7 +5,7 @@ interface Props {
   tone?: "normal" | "alert";
   className?: string;
   /**
-   * Play the app's reveal (measured from claude-buddy snapshots, relative to the entrance start):
+   * Play the app's reveal (measured from the app, relative to the entrance start):
    * the bubble pops in from its tail with a small overshoot, the title types in one character
    * per 20 ms, then the body and project row appear. Pure CSS; static under reduced motion.
    */

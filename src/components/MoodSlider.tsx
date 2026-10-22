@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { MAX_WAIT_SECONDS, MOODS, moodForWait, type MoodId } from "@/lib/moods";
-import { MochiStage } from "./MochiStage";
+import { HootStage } from "./HootStage";
 
 export function MoodSlider() {
   const [age, setAge] = useState(0);
@@ -36,7 +36,7 @@ export function MoodSlider() {
           Claude finished
         </button>
       </div>
-      <MochiStage mood={mood} scale={8} />
+      <HootStage mood={mood} scale={8} />
       <p role="status" className="sr-only">{MOODS[mood].spoken}</p>
     </div>
   );

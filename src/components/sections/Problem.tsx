@@ -6,7 +6,7 @@ export function Problem() {
       </h2>
       <p className="max-w-md text-lg text-paper/80">
         A permission prompt sits there for ten minutes while you read something else.
-        Mochi taps you the moment it happens, and again if you keep ignoring him.
+        Hoot taps you the moment it happens, and again if you keep ignoring it.
       </p>
     </section>
   );

@@ -5,9 +5,9 @@ const Cmd = ({ children }: { children: ReactNode }) => (
 );
 
 const FAQ: [string, ReactNode][] = [
-  ["Does it work with any Claude Code project?", "Yes. Mochi shows the name of the project that needs you."],
-  ["Can I silence him?", <>Yes. <Cmd>claude-buddy snooze MINUTES|forever|clear</Cmd>, or <Cmd>claude-buddy hide</Cmd>.</>],
-  ["Does he nag forever?", "No. He gives up after 3 minutes by default."],
+  ["Does it work with any Claude Code project?", "Yes. Hoot shows the name of the project that needs you."],
+  ["Can I silence it?", <>Yes. <Cmd>glade snooze MINUTES|forever|clear</Cmd>, or <Cmd>glade hide</Cmd>.</>],
+  ["Does Hoot nag forever?", "No. It gives up after 3 minutes by default."],
   ["Which macOS versions?", "macOS 13 or later."],
 ];
 

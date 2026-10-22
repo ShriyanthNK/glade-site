@@ -2,16 +2,16 @@ import fs from "node:fs";
 import path from "node:path";
 // @ts-expect-error pngjs (dev dependency) ships no type declarations
 import { PNG } from "pngjs";
-import { MOCHI_ENTER, MOCHI_LOOPS, type MochiSheet } from "./mochi-animation.generated";
+import { HOOT_ENTER, HOOT_LOOPS, type HootSheet } from "./hoot-animation.generated";
 
-const sheets: [string, MochiSheet][] = [...Object.entries(MOCHI_LOOPS), ["enter", MOCHI_ENTER]];
-const file = (s: MochiSheet) => path.join(process.cwd(), "public", s.src);
+const sheets: [string, HootSheet][] = [...Object.entries(HOOT_LOOPS), ["enter", HOOT_ENTER]];
+const file = (s: HootSheet) => path.join(process.cwd(), "public", s.src);
 
-describe("Mochi animation manifest", () => {
+describe("Hoot animation manifest", () => {
   for (const [id, s] of sheets) {
     describe(id, () => {
       it("points at a sheet that exists under public/", () => {
-        expect(s.src).toMatch(/^\/mochi\/[a-z-]+\.png$/);
+        expect(s.src).toMatch(/^\/hoot\/[a-z-]+\.png$/);
         expect(fs.existsSync(file(s))).toBe(true);
       });
       it("has a PNG laid out as frames x frameWidth by frameHeight", () => {
@@ -32,11 +32,11 @@ describe("Mochi animation manifest", () => {
 
   it("shares one frame width and art scale, so moods swap without jitter", () => {
     const widths = new Set(sheets.map(([, s]) => s.frameWidth));
-    const loopHeights = new Set(Object.values(MOCHI_LOOPS).map((s) => s.frameHeight));
+    const loopHeights = new Set(Object.values(HOOT_LOOPS).map((s) => s.frameHeight));
     expect(widths.size).toBe(1);
     expect(loopHeights.size).toBe(1);
     expect(new Set(sheets.map(([, s]) => s.sheetPxPerArtPx)).size).toBe(1);
-    expect(MOCHI_ENTER.frameHeight).toBeGreaterThanOrEqual([...loopHeights][0]);
+    expect(HOOT_ENTER.frameHeight).toBeGreaterThanOrEqual([...loopHeights][0]);
   });
 
   it("keeps every new asset small (under 400 KB in total)", () => {
@@ -45,7 +45,7 @@ describe("Mochi animation manifest", () => {
   });
 
   it("knows where each mood's bubble tail points", () => {
-    for (const s of Object.values(MOCHI_LOOPS)) {
+    for (const s of Object.values(HOOT_LOOPS)) {
       expect(s.bubbleTip).not.toBeNull();
       expect(s.bubbleTip!.y).toBeGreaterThan(0);
       expect(s.bubbleTip!.y).toBeLessThan(s.frameHeight);

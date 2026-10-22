@@ -1,14 +1,14 @@
 const STEPS = [
-  { title: "Install it", body: "Mochi lives in your menu bar." },
-  { title: "Let Claude work", body: "Go read, build, or make tea. Mochi stays out of sight." },
-  { title: "He taps you", body: "When Claude finishes or needs your OK, he pops up with the project name." },
+  { title: "Install it", body: "Hoot lives in your menu bar." },
+  { title: "Let Claude work", body: "Go read, build, or make tea. Hoot stays out of sight." },
+  { title: "Hoot taps you", body: "When Claude finishes or needs your OK, Hoot pops up with the project name." },
 ];
 
 const CONTROLS = [
-  ["claude-buddy snooze 30", "Quiet for 30 minutes"],
-  ["claude-buddy chime on", "Add a soft chime"],
-  ["claude-buddy delays 5 20", "Set wait and done delays (seconds)"],
-  ["claude-buddy test done", "Preview Mochi right now"],
+  ["glade snooze 30", "Quiet for 30 minutes"],
+  ["glade chime on", "Add a soft chime"],
+  ["glade delays 5 20", "Set wait and done delays (seconds)"],
+  ["glade test done", "Preview Hoot right now"],
 ];
 
 export function HowItWorks() {

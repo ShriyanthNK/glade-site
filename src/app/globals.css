@@ -111,36 +111,36 @@ body { font-family: var(--font-bricolage), system-ui, sans-serif; line-height: 1
 }
 
 
-/* Mochi as captured from the app (src/components/AnimatedMochi.tsx). --mochi-px is CSS px per
-   sheet px; a parent may set --mochi-scale-px to resize him per breakpoint. The box is the loop
+/* Hoot as captured from the app (src/components/AnimatedHoot.tsx). --hoot-px is CSS px per
+   sheet px; a parent may set --hoot-scale-px to resize it per breakpoint. The box is the loop
    frame; the sheet is anchored bottom-centre and may be taller (the entrance). */
-.mochi-anim {
-  --mochi-px: var(--mochi-scale-px, var(--mochi-px-base));
+.hoot-anim {
+  --hoot-px: var(--hoot-scale-px, var(--hoot-px-base));
   position: relative;
   flex: none;
-  width: calc(var(--mochi-box-w) * var(--mochi-px));
-  height: calc(var(--mochi-box-h) * var(--mochi-px));
+  width: calc(var(--hoot-box-w) * var(--hoot-px));
+  height: calc(var(--hoot-box-h) * var(--hoot-px));
 }
-.mochi-anim-sheet {
+.hoot-anim-sheet {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: calc(var(--mochi-fw) * var(--mochi-px));
-  height: calc(var(--mochi-fh) * var(--mochi-px));
-  background-image: var(--mochi-src);
+  width: calc(var(--hoot-fw) * var(--hoot-px));
+  height: calc(var(--hoot-fh) * var(--hoot-px));
+  background-image: var(--hoot-src);
   background-repeat: no-repeat;
-  background-size: calc(var(--mochi-fw) * var(--mochi-n) * var(--mochi-px)) 100%;
+  background-size: calc(var(--hoot-fw) * var(--hoot-n) * var(--hoot-px)) 100%;
   image-rendering: pixelated;
   /* resting frame: what shows when animations are off (reduced motion) */
-  background-position: calc(var(--mochi-rest) * var(--mochi-fw) * var(--mochi-px) * -1) 0;
+  background-position: calc(var(--hoot-rest) * var(--hoot-fw) * var(--hoot-px) * -1) 0;
   pointer-events: none;
 }
-.mochi-anim-sheet:not([data-mochi-sheet="static"]) {
-  animation: mochi-frames var(--mochi-dur) steps(var(--mochi-n), end) var(--mochi-iter);
+.hoot-anim-sheet:not([data-hoot-sheet="static"]) {
+  animation: hoot-frames var(--hoot-dur) steps(var(--hoot-n), end) var(--hoot-iter);
 }
-@keyframes mochi-frames {
+@keyframes hoot-frames {
   from { background-position: 0 0; }
-  to { background-position: calc(var(--mochi-fw) * var(--mochi-n) * var(--mochi-px) * -1) 0; }
+  to { background-position: calc(var(--hoot-fw) * var(--hoot-n) * var(--hoot-px) * -1) 0; }
 }
 
 /* Speech-bubble reveal (Bubble reveal prop), timed like the app's entrance. Every keyframe

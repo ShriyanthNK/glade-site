@@ -3,14 +3,14 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { preload } from "react-dom";
 import { Bubble } from "./Bubble";
 import { MOODS } from "@/lib/moods";
-import { AnimatedMochi } from "./AnimatedMochi";
-import { MOCHI_ENTER, MOCHI_LOOPS } from "@/lib/mochi-animation.generated";
+import { AnimatedHoot } from "./AnimatedHoot";
+import { HOOT_ENTER, HOOT_LOOPS } from "@/lib/hoot-animation.generated";
 
-// Mochi is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm
+// Hoot is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm
 // up: 1.5 and 2 CSS px per sheet px (the sheets hold 4 sheet px per art pixel).
-// The bubble's 24px tail is zoomed with the bubble (.7 at sm, .8 from 900px), and Mochi's frame
+// The bubble's 24px tail is zoomed with the bubble (.7 at sm, .8 from 900px), and Hoot's frame
 // is pulled up under it so the tail tip sits where the app's tail points.
-const TIP_Y = MOCHI_LOOPS.done.bubbleTip?.y ?? 0;
+const TIP_Y = HOOT_LOOPS.done.bubbleTip?.y ?? 0;
 
 const LINES = [
   "> refactor the auth middleware",
@@ -33,9 +33,9 @@ export function MockDesktop() {
   const [run, setRun] = useState(0);
   const [phase, setPhase] = useState<"working" | "done">("working");
   const [shown, setShown] = useState(0);
-  const [mochiPhase, setMochiPhase] = useState<"enter" | "loop">("enter");
-  preload(MOCHI_ENTER.src, { as: "image" });
-  preload(MOCHI_LOOPS.done.src, { as: "image" });
+  const [hootPhase, setHootPhase] = useState<"enter" | "loop">("enter");
+  preload(HOOT_ENTER.src, { as: "image" });
+  preload(HOOT_LOOPS.done.src, { as: "image" });
 
   useEffect(() => {
     if (reduced) return;
@@ -83,22 +83,22 @@ export function MockDesktop() {
         </div>
       </div>
 
-      {/* Mochi: bottom-anchored; once Claude is done he plays the app's entrance (rising from the
+      {/* Hoot: bottom-anchored; once Claude is done it plays the app's entrance (rising from the
           bottom edge with confetti), the bubble pops in and types, then the done loop runs. */}
       <div
-        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center [--mochi-scale-px:1.5px] [--mochi-tail:24px] min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 sm:[--mochi-scale-px:2px] sm:[--mochi-tail:16.8px] min-[900px]:[--mochi-tail:19.2px] ${done ? "" : "invisible motion-reduce:visible"}`}
+        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center [--hoot-scale-px:1.5px] [--hoot-tail:24px] min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 sm:[--hoot-scale-px:2px] sm:[--hoot-tail:16.8px] min-[900px]:[--hoot-tail:19.2px] ${done ? "" : "invisible motion-reduce:visible"}`}
       >
         <div key={`b${run}-${done}`} aria-hidden className="relative z-10 sm:[zoom:.7] min-[900px]:[zoom:.8]">
           <Bubble title={m.title} reveal={done && !reduced} />
         </div>
-        <div className="relative z-20" style={{ marginTop: `calc(var(--mochi-tail) - ${TIP_Y} * var(--mochi-scale-px))` }}>
-          <AnimatedMochi
+        <div className="relative z-20" style={{ marginTop: `calc(var(--hoot-tail) - ${TIP_Y} * var(--hoot-scale-px))` }}>
+          <AnimatedHoot
             key={`m${run}-${done}`}
             mood="done"
             scale={6}
-            phase={done ? mochiPhase : "loop"}
-            onEnterEnd={() => setMochiPhase("loop")}
-            title={done ? "Mochi" : undefined}
+            phase={done ? hootPhase : "loop"}
+            onEnterEnd={() => setHootPhase("loop")}
+            title={done ? "Hoot" : undefined}
           />
         </div>
       </div>
@@ -107,7 +107,7 @@ export function MockDesktop() {
 
       <button
         type="button"
-        onClick={() => { setPhase("working"); setShown(0); setMochiPhase("enter"); setRun((r) => r + 1); }}
+        onClick={() => { setPhase("working"); setShown(0); setHootPhase("enter"); setRun((r) => r + 1); }}
         className="absolute bottom-4 left-4 motion-reduce:hidden border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
       >
         Replay

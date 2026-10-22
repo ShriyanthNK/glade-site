@@ -18,42 +18,36 @@ npm run build
 `siteConfig.name` is the single source for the brand text (nav, footer, page title, share image).
 Changing it is a one-line edit; then re-run `node scripts/make-og.mjs` so the share image picks it up.
 `src/lib/brand-name.test.ts` fails if the name is hard-coded anywhere else in `src/`.
-This README's title is static text, so update it by hand. CLI commands (`claude-buddy ...`) are real
+This README's title is static text, so update it by hand. CLI commands (`glade ...`) are real
 command names and are not part of the brand setting.
 
-## Sprites
+## Hoot (the mascot)
+Hoot, the owl, is drawn in code. The art was designed and reviewed in the glade app repo
+(`design/mascots/mascots.js`); the macOS app ports that drawing code line for line and tests it pixel for
+pixel, and this site exports from the same file, so the two cannot disagree. `scripts/export-hoot.mjs` is a
+dev-time script (the site only ships its output):
 ```bash
-node scripts/extract-sprites.mjs   # regenerates src/lib/sprites.generated.ts from scripts/snapshots/*.png
-node scripts/make-icon.mjs         # regenerates src/app/icon.svg from the "done" sprite
+node scripts/export-hoot.mjs                      # needs ../glade next to this repo, or --source PATH / $HOOT_SOURCE
+node scripts/make-icon.mjs                        # src/app/icon.svg from the resting sprite
+node scripts/make-og.mjs                          # share image (see below)
 ```
-Snapshots are made with `claude-buddy snapshot FILE.png [wait|done] [AGE]`.
+It writes `public/hoot/*.png` (indexed-colour sprite sheets, 24 fps, 4 sheet px per art pixel),
+`src/lib/hoot-animation.generated.ts` (frame size, fps, duration, resting frame, where a bubble tail should
+point) and `src/lib/sprites.generated.ts` (static pixel maps and the palette). Do not edit those by hand.
 
-## Mochi animation
-The animated Mochi (hero, mood slider, final CTA, 404) plays real frames captured from the app.
-`scripts/capture-mochi-animation.mjs` renders every frame with the app's own
-`claude-buddy snapshot FILE.png [wait|done] [AGE] [ENTER_SECONDS]`, so it needs the Claude Buddy
-app installed locally (CLI in `$CLAUDE_BUDDY_CLI` or `~/.claude-buddy/bin/claude-buddy`); it is a
-dev-time script, the site itself only ships the PNGs. It masks out the app's speech bubble (the
-site draws its own), drops the grey background and soft shadows, downsamples 3x (4 sheet px per
-art pixel) and writes indexed sprite sheets plus `src/lib/mochi-animation.generated.ts`
-(frame size, fps, duration, resting frame, where the bubble tail points). Do not edit that file.
-```bash
-node scripts/capture-mochi-animation.mjs                  # rewrites public/mochi/*.png + manifest
-node scripts/capture-mochi-animation.mjs --contact DIR    # also writes contact sheets of every frame
-```
-| Sheet | What | Frames | Size |
-| --- | --- | --- | --- |
-| `enter.png` | entrance (done): rises from the bottom with confetti | 41 @ 24 fps, 1.71 s | 13.4 KB |
-| `done-loop.png` | hop and wave, sparkles | 94 @ 24 fps, 3.92 s | 20.0 KB |
-| `calm-loop.png` | breathing, wave, blinks | 180 @ 24 fps, 7.5 s | 7.8 KB |
-| `annoyed-loop.png` | "?" sign, sweat drop, lean | 144 @ 24 fps, 6.0 s | 6.7 KB |
-| `angry-loop.png` | "!!" sign, puffs, stomping | 64 @ 32 fps, 2.0 s | 5.8 KB |
+| Sheet | What | Frames |
+| --- | --- | --- |
+| `enter.png` | the app's pop-up entrance (rises from below with squash and stretch), Hoot in its "done" mood | 24, 1.0 s |
+| `done.png` | happy, wings up, sparkles | 144, 6 s loop |
+| `calm.png` | the app's first waiting tier: wide-eyed, foot tap, a wave | 144, 6 s loop |
+| `annoyed.png` | half-lidded, brows, sweat drop and "?" | 144, 6 s loop |
+| `angry.png` | glaring, puffing up, "!!" and steam | 144, 6 s loop |
 
-About 54 KB in total. `src/components/AnimatedMochi.tsx` steps through a sheet with a CSS
-`steps()` animation (no per-frame JS) and shows the resting frame under reduced motion. The app's
-loops are layered and never repeat exactly; each sheet is a real stretch of frames chosen so its
-last frame runs into its first. `Bubble`'s `reveal` prop copies the app's bubble entrance (pop
-with overshoot, title typed at 50 characters per second, then the project row).
+About 66 KB in total. Every loop is seamless: the drawing code snaps all its periodic motion to the loop length,
+and a test in the app repo checks that frame t and frame t + 6 s are identical. `src/components/AnimatedHoot.tsx`
+steps through a sheet with a CSS `steps()` animation (no per-frame JS) and shows the resting frame under reduced
+motion. `Bubble`'s `reveal` prop copies the app's bubble entrance (pop with overshoot, title typed at 50 characters
+per second, then the project row).
 
 ## Backdrop
 The fixed night-forest scene behind the page is pixel art drawn by `scripts/make-backdrop.mjs`
@@ -66,7 +60,7 @@ node scripts/make-backdrop.mjs     # regenerates public/backdrop.png
 
 ## Share image (Open Graph and Twitter)
 `src/app/opengraph-image.png` and `src/app/twitter-image.png` (1200x630, identical, under 300KB) are
-built by `scripts/make-og.mjs`: the backdrop scaled 3x with nearest-neighbour, the `done` sprite, the speech
+built by `scripts/make-og.mjs`: the backdrop scaled 3x with nearest-neighbour, the `done` Hoot sprite, the speech
 bubble, and the headline in Bricolage Grotesque / JetBrains Mono (latin subsets in `scripts/fonts/`, both OFL).
 It renders HTML in headless Chromium, so it needs Playwright, which is deliberately not a project dependency:
 ```bash

@@ -15,7 +15,7 @@ const frame = JSON.parse(
   sprites.slice(sprites.indexOf("{", sprites.indexOf("export const SPRITES")), sprites.lastIndexOf("}") + 1).replace(/,(\s*[}\]])/g, "$1"),
 ).done;
 const pal = Object.fromEntries(
-  [...read("../src/lib/sprites.ts").toString().matchAll(/^\s+(\w): "(#[0-9a-fA-F]{6})"/gm)].map((m) => [m[1], m[2]]),
+  [...read("../src/lib/sprites.generated.ts").toString().matchAll(/^\s+(\w): "(#[0-9a-fA-F]{6})"/gm)].map((m) => [m[1], m[2]]),
 );
 let rects = "";
 frame.rows.forEach((row, y) => {
@@ -42,7 +42,7 @@ body{width:${W}px;height:${H}px;overflow:hidden;position:relative;background:#2a
 .copy{position:absolute;left:72px;top:172px;width:720px}
 .brand{font-size:40px;font-weight:800;letter-spacing:-.01em;color:var(--sparkle)}
 h1{margin-top:14px;font-size:94px;font-weight:800;line-height:1.02;letter-spacing:-.03em}
-.mochi{position:absolute;left:870px;top:300px;image-rendering:pixelated}
+.hoot{position:absolute;left:880px;top:290px;image-rendering:pixelated}
 .bubble{position:absolute;left:770px;top:52px;width:380px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.28))}
 .bubble .box{background:var(--paper);color:var(--outline);padding:24px 28px;font-family:Mono,monospace;box-shadow:0 -8px 0 var(--outline),0 8px 0 var(--outline),-8px 0 0 var(--outline),8px 0 0 var(--outline)}
 .bubble .row{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
@@ -56,7 +56,7 @@ h1{margin-top:14px;font-size:94px;font-weight:800;line-height:1.02;letter-spacin
 <div class="copy"><div class="brand">${esc(name)}</div><h1>Stop watching<br>the terminal.</h1></div>
 <div class="bubble"><div class="box"><div class="row"><div class="t">CLAUDE'S DONE, YOUR TURN</div><div class="x">x</div></div><div class="chip">&gt; my-project</div></div>
 <div class="tail"><i style="width:24px"></i><i style="width:16px"></i><i style="width:8px"></i></div></div>
-<svg class="mochi" width="${frame.width * 10}" height="${frame.height * 10}" viewBox="0 0 ${frame.width} ${frame.height}" shape-rendering="crispEdges">${rects}</svg>
+<svg class="hoot" width="${frame.width * 10}" height="${frame.height * 10}" viewBox="0 0 ${frame.width} ${frame.height}" shape-rendering="crispEdges">${rects}</svg>
 </body>`;
 
 const browser = await chromium.launch();

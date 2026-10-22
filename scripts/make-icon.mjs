@@ -1,9 +1,9 @@
-// Builds src/app/icon.svg from the "done" sprite (padded to a square). Run: node scripts/make-icon.mjs
+// Builds src/app/icon.svg from the resting (waiting) Hoot sprite (padded to a square). Run: node scripts/make-icon.mjs
 import fs from "node:fs";
 const src = fs.readFileSync(new URL("../src/lib/sprites.generated.ts", import.meta.url), "utf8");
 const body = src.slice(src.indexOf("export const SPRITES"));
-const frame = JSON.parse(body.slice(body.indexOf("{"), body.lastIndexOf("}") + 1).replace(/,(\s*[}\]])/g, "$1").replace(/^\{/, "{")).done;
-const pal = fs.readFileSync(new URL("../src/lib/sprites.ts", import.meta.url), "utf8");
+const frame = JSON.parse(body.slice(body.indexOf("{"), body.lastIndexOf("}") + 1).replace(/,(\s*[}\]])/g, "$1").replace(/^\{/, "{")).calm;
+const pal = fs.readFileSync(new URL("../src/lib/sprites.generated.ts", import.meta.url), "utf8");
 const P = Object.fromEntries([...pal.matchAll(/^\s+(\w): "(#[0-9a-fA-F]{6})"/gm)].map((m) => [m[1], m[2]]));
 const size = Math.max(frame.width, frame.height);
 const ox = Math.floor((size - frame.width) / 2), oy = size - frame.height;

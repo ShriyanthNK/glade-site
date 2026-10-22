@@ -18,7 +18,7 @@ export const MOODS: Record<MoodId, MoodDef> = {
   angry: { id: "angry", title: "HELLOOO? CLAUDE NEEDS YOU", spoken: "Hellooo? Claude needs you", body: WAIT_BODY, tone: "alert" },
 };
 
-// Seconds of waiting at which Mochi changes mood. Measured from `claude-buddy snapshot`.
+// Seconds of waiting at which Hoot changes mood (the app's tiers).
 export const THRESHOLDS = { annoyed: 58, angry: 118 };
 export const MAX_WAIT_SECONDS = 180; // giveUpAfter default
 
