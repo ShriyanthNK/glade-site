@@ -26,3 +26,9 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | An optional soft chime plays when Hoot appears (off by default) | `Config.chime`, Alerts page, `Controller.show` |
 | Connecting Claude Code is one button in the app (the Get started checklist on Home, or the Claude Code page) | `HomePage.swift`, `ClaudeCodePage.swift`, `HookInstaller` |
 | Nothing leaves your Mac from Glade's own code: the app has no networking code, so a photo cannot be uploaded by it | grep of `Sources/`; public source |
+| Snooze from the menu bar item (30 minutes, 1 hour, 2 hours, until turned off) and from the Alerts page | `StatusItemController.swift`, `AlertsPage.swift` |
+| The Claude Code page connects and disconnects the hooks; About > Uninstall removes everything | `ClaudeCodePage.swift`, `AboutPage.swift`, `Uninstaller` |
+| Glade opens Terminal.app in a "Glade" profile (Hoot's colors, see-through background) with a scene behind it; the built-in scene is Night Forest | `TerminalProfile.swift`, `TerminalBridge.openGladeWindow`, `LookStore.builtins` |
+| Commands: `glade open looks`, `glade look add PHOTO`, `glade snooze MINUTES` (also forever, clear), `glade statusline install` | `Sources/Glade/main.swift` usage text |
+| Photos are read with the system's image decoder (JPEG, PNG, HEIC and the other formats macOS supports) | `LookPipeline.load` (ImageIO) |
+| Glade's own code has no networking, so it cannot upload a photo | grep of `Sources/`; public source |

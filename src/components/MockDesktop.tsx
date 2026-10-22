@@ -6,8 +6,8 @@ import { MOODS } from "@/lib/moods";
 import { AnimatedHoot } from "./AnimatedHoot";
 import { HOOT_ENTER, HOOT_LOOPS } from "@/lib/hoot-animation.generated";
 
-// Hoot is drawn at scale 6 on phones (the whole stack is then scaled down to fit) and 8 from sm
-// up: 1.5 and 2 CSS px per sheet px (the sheets hold 4 sheet px per art pixel).
+// Hoot is drawn at scale 5 on phones and 8 from sm up: 1.25 and 2 CSS px per sheet px (the sheets hold
+// 4 sheet px per art pixel). On phones the bubble is a narrower box at real text size instead of a shrunk copy.
 // The bubble's 24px tail is zoomed with the bubble (.7 at sm, .8 from 900px), and Hoot's frame
 // is pulled up under it so the tail tip sits where the app's tail points.
 const TIP_Y = HOOT_LOOPS.done.bubbleTip?.y ?? 0;
@@ -49,7 +49,7 @@ export function MockDesktop() {
   const visible = reduced ? LINES.length : shown;
   return (
     <div
-      className="relative mx-auto aspect-[4/5] w-full max-w-3xl overflow-hidden rounded-2xl border-4 border-outline shadow-2xl sm:aspect-[16/11]"
+      className="relative mx-auto aspect-[5/8] w-full max-w-3xl overflow-hidden rounded-2xl border-4 border-outline shadow-2xl sm:aspect-[16/11]"
       style={{ background: "linear-gradient(135deg, #5a3d6e 0%, #3a2a47 55%, #2c2038 100%)" }}
     >
       {/* macOS menu bar */}
@@ -91,7 +91,7 @@ export function MockDesktop() {
       {/* Hoot: bottom-anchored; once Claude is done it plays the app's entrance (rising from the
           bottom edge with confetti), the bubble pops in and types, then the done loop runs. */}
       <div
-        className={`absolute bottom-0 right-3 flex origin-bottom-right scale-[.55] flex-col items-center [--hoot-scale-px:1.5px] [--hoot-tail:24px] min-[420px]:scale-75 sm:-bottom-2 sm:right-6 sm:scale-100 sm:[--hoot-scale-px:2px] sm:[--hoot-tail:16.8px] min-[900px]:[--hoot-tail:19.2px] ${done ? "" : "invisible motion-reduce:visible"}`}
+        className={`absolute bottom-0 right-3 flex origin-bottom-right flex-col items-center [--hoot-scale-px:1.25px] [--hoot-tail:24px] sm:-bottom-2 sm:right-6 sm:[--hoot-scale-px:2px] sm:[--hoot-tail:16.8px] min-[900px]:[--hoot-tail:19.2px] ${done ? "" : "invisible motion-reduce:visible"}`}
       >
         <div key={`b${run}-${done}`} aria-hidden className="relative z-10 sm:[zoom:.7] min-[900px]:[zoom:.8]">
           <Bubble title={m.title} reveal={done && !reduced} />

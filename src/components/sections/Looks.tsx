@@ -2,8 +2,8 @@ import { siteConfig } from "../../../site.config";
 const BACKDROP = { backgroundImage: "url(/backdrop.png)", backgroundSize: "cover", backgroundPosition: "bottom", imageRendering: "pixelated" as const };
 
 const STEPS = [
-  ["Drop in a photo", "Any image: a view, a game screenshot, your cat."],
-  [`${siteConfig.name} makes it pixel art`, "On your Mac. The app has no networking code, so the photo cannot leave."],
+  ["Drop in a photo", "A view, a game screenshot, your cat."],
+  [`${siteConfig.name} makes it pixel art`, `On your Mac. ${siteConfig.name}'s own code has no networking, so it cannot upload your photo.`],
   ["Your text stays readable", "It is darkened just enough to keep clear contrast behind the terminal."],
 ];
 

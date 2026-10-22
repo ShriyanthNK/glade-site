@@ -1,7 +1,7 @@
 const FACTS = [
   "Lives in your menu bar, with its own window for settings.",
   "Photos become pixel art on your Mac. The app has no networking code.",
-  "Works with Claude Code through its hooks.",
+  "Connects to Claude Code's hooks.",
 ];
 
 export function Facts() {

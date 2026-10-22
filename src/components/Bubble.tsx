@@ -30,7 +30,7 @@ export function Bubble({ title, body, project = "my-project", tone = "normal", c
       style={{ filter: "drop-shadow(0 8px 0 rgba(0,0,0,.25))" }}
     >
       <div
-        className="font-mono bg-paper text-outline px-6 py-5 max-w-[34rem]"
+        className="font-mono bg-paper text-outline px-4 py-3 max-w-[17rem] sm:px-6 sm:py-5 sm:max-w-[34rem]"
         style={{
           boxShadow:
             "0 -8px 0 0 var(--outline), 0 8px 0 0 var(--outline), -8px 0 0 0 var(--outline), 8px 0 0 0 var(--outline)",
@@ -38,7 +38,7 @@ export function Bubble({ title, body, project = "my-project", tone = "normal", c
       >
         <div className="flex items-start justify-between gap-6">
           <p
-            className="text-lg sm:text-xl leading-tight"
+            className="text-base sm:text-xl leading-tight"
             style={{ fontWeight: 800, color: tone === "alert" ? "var(--alert)" : "var(--outline)" }}
           >
             {reveal ? (

@@ -28,18 +28,18 @@ export function MoodSlider() {
           aria-valuetext={`${age} seconds`}
           disabled={done}
           onChange={(e) => setAge(Number(e.target.value))}
-          className="mt-4 w-full accent-[var(--sparkle)] disabled:opacity-40"
+          className="mt-4 h-11 w-full cursor-pointer accent-[var(--sparkle)] disabled:opacity-40"
         />
         <div aria-hidden className="relative mt-2 h-10 text-xs text-paper/80">
           {TICKS.map(([s, label], i) => (
             <span
               key={label}
               data-tick={s}
-              className="absolute top-0 whitespace-nowrap"
+              className="absolute top-0 whitespace-nowrap text-xs sm:text-sm"
               style={{ left: `${(s / MAX_WAIT_SECONDS) * 100}%`, transform: `translateX(${i === 0 ? "0" : i === TICKS.length - 1 ? "-100%" : "-50%"})` }}
             >
               <span className={`block h-2 w-px bg-paper/60 ${i === 0 ? "mr-auto" : i === TICKS.length - 1 ? "ml-auto" : "mx-auto"}`} />
-              {s}s {label}
+              {s}s<span className="hidden sm:inline"> {label}</span>
             </span>
           ))}
         </div>
