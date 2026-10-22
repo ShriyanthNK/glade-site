@@ -1,6 +1,6 @@
-# Boop launch page
+# Glade launch page
 
-Next.js launch page for Boop and its mascot Mochi.
+Next.js launch page for Glade and its mascot Mochi.
 
 ## Run
 ```bash
