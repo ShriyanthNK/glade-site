@@ -1,6 +1,6 @@
-# Psst launch page
+# Boop launch page
 
-Next.js launch page for Psst and its mascot Mochi.
+Next.js launch page for Boop and its mascot Mochi.
 
 ## Run
 ```bash
