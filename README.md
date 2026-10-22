@@ -1,6 +1,6 @@
-# Claude Buddy launch page
+# Psst launch page
 
-Next.js launch page for Claude Buddy and Mochi. "Claude Buddy" is a working name; see "Product name" below.
+Next.js launch page for Psst and its mascot Mochi.
 
 ## Run
 ```bash
