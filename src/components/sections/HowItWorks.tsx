@@ -5,13 +5,6 @@ const STEPS = [
   { title: "Pick a look", body: `Choose a scene, open a ${siteConfig.name} terminal, and let Claude work. Hoot taps you when it matters.` },
 ];
 
-const CONTROLS = [
-  ["glade open looks", "Open the Looks page"],
-  ["glade look add photo.jpg", "Make a look from a photo"],
-  ["glade snooze 30", "Quiet for 30 minutes"],
-  ["glade statusline install", "Put Hoot in the status line"],
-];
-
 export function HowItWorks() {
   return (
     <section id="how" className="mx-auto max-w-6xl px-5 py-24 md:py-32">
@@ -25,20 +18,6 @@ export function HowItWorks() {
           </li>
         ))}
       </ol>
-      <div className="mt-24 grid gap-8 md:grid-cols-[1fr_1.6fr] md:gap-16">
-        <div>
-          <h3 className="text-3xl font-extrabold tracking-tight">Prefer the command line?</h3>
-          <p className="mt-3 max-w-sm text-paper/80">Many things in the window are also <code className="bg-ink/85 px-1 font-mono font-bold text-sprout">glade</code> commands.</p>
-        </div>
-        <dl className="divide-y-4 divide-outline border-4 border-outline bg-surface">
-          {CONTROLS.map(([cmd, what]) => (
-            <div key={cmd} className="grid gap-1 p-4 sm:grid-cols-[auto_1fr] sm:items-baseline sm:gap-6">
-              <dt className="break-words font-mono text-sm font-extrabold text-sprout">{cmd}</dt>
-              <dd className="text-sm text-paper/80 sm:text-right">{what}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
     </section>
   );
 }

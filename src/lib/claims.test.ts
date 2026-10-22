@@ -19,6 +19,7 @@ const BANNED: [RegExp, string][] = [
   [/\b(no tracking|zero telemetry|private by design|end-to-end)\b/i, "privacy claim beyond FACTS.md"],
   [/\bMochi\b/, "the old mascot"],
   [/claude-buddy/i, "the old name"],
+  [/command line|\bglade (open|test|look|snooze|statusline|hooks)\b/i, "the removed command-line tool"],
 ];
 
 describe("the page does not claim what it must not", () => {

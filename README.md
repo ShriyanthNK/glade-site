@@ -18,8 +18,7 @@ npm run build
 `siteConfig.name` is the single source for the brand text (nav, footer, page title, share image).
 Changing it is a one-line edit; then re-run `node scripts/make-og.mjs` so the share image picks it up.
 `src/lib/brand-name.test.ts` fails if the name is hard-coded anywhere else in `src/`.
-This README's title is static text, so update it by hand. CLI commands (`glade ...`) are real
-command names and are not part of the brand setting.
+This README's title is static text, so update it by hand.
 
 ## Hoot (the mascot)
 Hoot, the owl, is drawn in code. The art was designed and reviewed in the glade app repo

@@ -19,8 +19,7 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | The app contains no networking code | grep of `Sources/` for URLSession, NWConnection etc. (none); source is public |
 | Glade adds five hooks (Notification, PermissionRequest, Stop, UserPromptSubmit, PostToolUse) to Claude Code's settings.json, saves a backup first and only touches its own entries | `HookInstaller`, `HookInstallerTests` |
 | An optional Hoot status line: calm under 60 % context, impatient from 60 %, worried from 85 %; it never overwrites another status line unless asked and restores it when removed | `StatusLine.swift`, `StatusLineTests` |
-| Uninstall is in the app (About) and removes hooks, status line (restoring a replaced one), looks, settings and the `glade` command | `Uninstaller`, `UninstallerTests` |
-| There is a `glade` command (open, snooze, look add, statusline, test ...) | `Sources/Glade/main.swift` |
+| Uninstall is in the app (About) and removes hooks, status line (restoring a replaced one), looks and settings | `Uninstaller`, `UninstallerTests` |
 | Glade is an independent project, not affiliated with or endorsed by Anthropic | owner's decision, `Footer.tsx` |
 | Alerts work with any terminal Claude Code runs in; clicking Hoot jumps back to it | `Controller.activateTerminal`, `knownTerminalBundles` |
 | An optional soft chime plays when Hoot appears (off by default) | `Config.chime`, Alerts page, `Controller.show` |
@@ -29,7 +28,6 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | Snooze from the menu bar item (30 minutes, 1 hour, 2 hours, until turned off) and from the Alerts page | `StatusItemController.swift`, `AlertsPage.swift` |
 | The Claude Code page connects and disconnects the hooks; About > Uninstall removes everything | `ClaudeCodePage.swift`, `AboutPage.swift`, `Uninstaller` |
 | Glade opens Terminal.app in a "Glade" profile (Hoot's colors, see-through background) with a scene behind it; the built-in scene is Night Forest | `TerminalProfile.swift`, `TerminalBridge.openGladeWindow`, `LookStore.builtins` |
-| Commands: `glade open looks`, `glade look add PHOTO`, `glade snooze MINUTES` (also forever, clear), `glade statusline install` | `Sources/Glade/main.swift` usage text |
 | Photos are read with the system's image decoder (JPEG, PNG, HEIC and the other formats macOS supports) | `LookPipeline.load` (ImageIO) |
 | Glade's own code has no networking, so it cannot upload a photo | grep of `Sources/`; public source |
 | The status line shows Hoot's face and mood word, the model name, the project folder and a context bar with a percentage | `StatusLine.swift` script |
@@ -38,4 +36,4 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | Alerts get more insistent the longer Claude waits (waiting, annoyed, angry) | `Views.swift` tiers |
 | You can choose the font and size (10 to 24 pt) for Glade terminals: any installed monospaced font, with a live preview; JetBrains Mono can be installed with one click into your own Fonts folder, and uninstalling removes only what Glade added | `TerminalFonts.swift`, `TerminalFontCard.swift`, `TerminalFontsTests` |
 | The app and this page are set in Bricolage Grotesque, Pixelify Sans and JetBrains Mono (open fonts, SIL OFL) | `Resources/Fonts` with license texts; `BrandFontsTests` |
-| The scenes animation shows a generated sample picture (not a real photo) going through the app's real look pipeline | `motion/looks/tools/make-assets.mjs` (final stage is `glade look add --out`) |
+| The scenes animation shows a generated sample picture (not a real photo) going through the app's real look pipeline | `motion/looks/tools/make-assets.mjs` (its last stage ran the app's look pipeline through a command-line export that has since been removed, so the script no longer runs; the rendered video is kept) |
