@@ -12,15 +12,16 @@ describe("moodForWait", () => {
     expect(moodForWait(THRESHOLDS.angry)).toBe("angry"));
   it("is angry at the give-up age", () =>
     expect(moodForWait(MAX_WAIT_SECONDS)).toBe("angry"));
-  it("uses the measured app thresholds", () =>
-    expect(THRESHOLDS).toEqual({ annoyed: 58, angry: 118 }));
+  it("uses the app's impatience tiers (60 s and 120 s after Hoot appears)", () =>
+    expect(THRESHOLDS).toEqual({ annoyed: 60, angry: 120 }));
 });
 
 describe("MOODS copy", () => {
   it("matches the app verbatim", () => {
     expect(MOODS.done.title).toBe("CLAUDE'S DONE, YOUR TURN");
     expect(MOODS.calm.title).toBe("CLAUDE'S WAITING ON YOU");
-    expect(MOODS.calm.body).toBe("Claude needs your permission to use Bash");
+    expect(MOODS.calm.body).toBe("Run: npm test --coverage");
+    expect(MOODS.done.body).toBe("Refactored the parser and fixed 3 failing tests.");
     expect(MOODS.annoyed.title).toBe("STILL WAITING...");
     expect(MOODS.angry.title).toBe("HELLOOO? CLAUDE NEEDS YOU");
     expect(MOODS.angry.tone).toBe("alert");

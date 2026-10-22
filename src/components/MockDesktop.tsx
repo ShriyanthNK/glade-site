@@ -63,15 +63,20 @@ export function MockDesktop() {
       </div>
 
       {/* terminal window */}
-      <div className="m-4 w-[min(24rem,92%)] overflow-hidden rounded-lg border border-white/15 bg-ink/90 shadow-xl sm:ml-8 sm:mt-6">
-        <div className="flex items-center gap-2 bg-black/30 px-3 py-2 font-mono text-xs text-paper/70">
+      <div
+        className="relative m-4 w-[min(24rem,92%)] overflow-hidden rounded-lg border border-white/15 shadow-xl sm:ml-8 sm:mt-6"
+        style={{ backgroundImage: "url(/backdrop.png)", backgroundSize: "cover", backgroundPosition: "bottom", imageRendering: "pixelated" }}
+      >
+        {/* the scene shows through the terminal, tinted like the app's terminal profile */}
+        <div aria-hidden className="absolute inset-0 bg-ink/55" />
+        <div className="relative flex items-center gap-2 bg-black/30 px-3 py-2 font-mono text-xs text-paper/70">
           <span aria-hidden className="h-3 w-3 rounded-full bg-alert" />
           <span aria-hidden className="h-3 w-3 rounded-full bg-sparkle" />
           <span aria-hidden className="h-3 w-3 rounded-full bg-sprout" />
           <span className="ml-3">claude: my-project</span>
         </div>
         <div
-          className="min-h-[7.5rem] p-4 font-mono text-xs leading-6 text-paper sm:text-sm"
+          className="relative min-h-[7.5rem] p-4 font-mono text-xs leading-6 text-paper sm:text-sm"
           role="img"
           aria-label="Mock terminal: Claude Code refactoring an auth middleware, then finishing"
         >

@@ -1,7 +1,11 @@
 "use client";
 import { useState } from "react";
-import { MAX_WAIT_SECONDS, MOODS, moodForWait, type MoodId } from "@/lib/moods";
+import { MAX_WAIT_SECONDS, MOODS, THRESHOLDS, moodForWait, type MoodId } from "@/lib/moods";
 import { HootStage } from "./HootStage";
+
+const TIER_NAME: Record<MoodId, string> = { calm: "waiting", annoyed: "annoyed", angry: "angry", done: "finished" };
+// Where Hoot changes: the tick labels under the slider.
+const TICKS: [number, string][] = [[0, "waiting"], [THRESHOLDS.annoyed, "annoyed"], [THRESHOLDS.angry, "angry"], [MAX_WAIT_SECONDS, "gives up"]];
 
 export function MoodSlider() {
   const [age, setAge] = useState(0);
@@ -9,7 +13,7 @@ export function MoodSlider() {
   const mood: MoodId = done ? "done" : moodForWait(age);
 
   return (
-    <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+    <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
       <div className="max-w-md">
         <label htmlFor="wait" className="block text-xl font-semibold">
           How long Claude has waited
@@ -26,7 +30,20 @@ export function MoodSlider() {
           onChange={(e) => setAge(Number(e.target.value))}
           className="mt-4 w-full accent-[var(--sparkle)] disabled:opacity-40"
         />
-        <p className="mt-2 text-sm" aria-hidden>{done ? "finished" : `${age}s`}</p>
+        <div aria-hidden className="relative mt-2 h-10 text-xs text-paper/80">
+          {TICKS.map(([s, label], i) => (
+            <span
+              key={label}
+              data-tick={s}
+              className="absolute top-0 whitespace-nowrap"
+              style={{ left: `${(s / MAX_WAIT_SECONDS) * 100}%`, transform: `translateX(${i === 0 ? "0" : i === TICKS.length - 1 ? "-100%" : "-50%"})` }}
+            >
+              <span className={`block h-2 w-px bg-paper/60 ${i === 0 ? "mr-auto" : i === TICKS.length - 1 ? "ml-auto" : "mx-auto"}`} />
+              {s}s {label}
+            </span>
+          ))}
+        </div>
+        <p className="mt-1 text-sm font-semibold" aria-hidden>{done ? "finished" : `${age}s · ${TIER_NAME[mood]}`}</p>
         <button
           type="button"
           aria-pressed={done}

@@ -1,3 +1,4 @@
+import { siteConfig } from "../../../site.config";
 import type { ReactNode } from "react";
 
 const Cmd = ({ children }: { children: ReactNode }) => (
@@ -5,15 +6,18 @@ const Cmd = ({ children }: { children: ReactNode }) => (
 );
 
 const FAQ: [string, ReactNode][] = [
-  ["Does it work with any Claude Code project?", "Yes. Hoot shows the name of the project that needs you."],
-  ["Can I silence it?", <>Yes. <Cmd>glade snooze MINUTES|forever|clear</Cmd>, or <Cmd>glade hide</Cmd>.</>],
-  ["Does Hoot nag forever?", "No. It gives up after 3 minutes by default."],
+  [`What does ${siteConfig.name} change in my Claude Code settings?`, "It adds five hooks (Notification, PermissionRequest, Stop, UserPromptSubmit, PostToolUse) and, only if you turn it on, a status line. It saves a backup of settings.json first and only touches its own entries. You can remove them from the Claude Code page."],
+  ["Does it upload my photos?", "No. They are turned into pixel art on your Mac, and the app contains no networking code, so it has no way to send them anywhere. The source is on GitHub."],
+  ["Will it nag me while I'm working?", "No. If your terminal is in front and you are typing, Hoot stays away. It also gives up after 3 minutes by default, and you can snooze it from the menu bar."],
+  ["Does it work with iTerm2, Ghostty or VS Code?", "The alerts work with any terminal Claude Code runs in, and clicking Hoot jumps back to it. The scene behind your terminal works with Terminal.app today."],
+  ["How do I uninstall it?", <>In the app, open About and choose Uninstall {siteConfig.name}. It removes its hooks and status line (and puts back one it replaced), your looks and settings, and the <Cmd>glade</Cmd> command.</>],
   ["Which macOS versions?", "macOS 13 or later."],
+  ["Is this from Anthropic?", `No. ${siteConfig.name} is an independent project, not affiliated with or endorsed by Anthropic.`],
 ];
 
 export function Faq() {
   return (
-    <section className="mx-auto grid max-w-6xl gap-10 px-5 pb-24 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pb-32">
+    <section id="faq" className="mx-auto grid max-w-6xl gap-10 px-5 pb-24 md:grid-cols-[1fr_1.6fr] md:gap-16 md:pb-32">
       <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Questions</h2>
       <div className="divide-y-4 divide-outline border-y-4 border-outline">
         {FAQ.map(([q, a]) => (
@@ -29,7 +33,7 @@ export function Faq() {
           </details>
         ))}
       </div>
-      {/* TODO(owner): add privacy, price and license answers once confirmed. */}
+      {/* TODO(owner): add price and license answers once confirmed. */}
     </section>
   );
 }

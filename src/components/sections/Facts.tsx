@@ -1,7 +1,7 @@
 const FACTS = [
-  "Menu-bar only. No Dock icon.",
-  "Listens to Claude Code through its hooks, on your Mac.",
-  "macOS 13 or later.",
+  "Lives in your menu bar, with its own window for settings.",
+  "Photos become pixel art on your Mac. The app has no networking code.",
+  "Works with Claude Code through its hooks.",
 ];
 
 export function Facts() {

@@ -53,7 +53,7 @@ h1{margin-top:14px;font-size:94px;font-weight:800;line-height:1.02;letter-spacin
 .tail i{display:block;margin:0 auto;height:8px;background:var(--outline)}
 </style><body>
 <div class="bg"></div><div class="scrim"></div>
-<div class="copy"><div class="brand">${esc(name)}</div><h1>Stop watching<br>the terminal.</h1></div>
+<div class="copy"><div class="brand">${esc(name)}</div><h1>Give your<br>terminal a<br>forest.</h1></div>
 <div class="bubble"><div class="box"><div class="row"><div class="t">CLAUDE'S DONE, YOUR TURN</div><div class="x">x</div></div><div class="chip">&gt; my-project</div></div>
 <div class="tail"><i style="width:24px"></i><i style="width:16px"></i><i style="width:8px"></i></div></div>
 <svg class="hoot" width="${frame.width * 10}" height="${frame.height * 10}" viewBox="0 0 ${frame.width} ${frame.height}" shape-rendering="crispEdges">${rects}</svg>

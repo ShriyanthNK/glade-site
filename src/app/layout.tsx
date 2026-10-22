@@ -13,9 +13,9 @@ const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["500", "800"], variab
 const host = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
 const metadataBase = new URL(host ? `https://${host}` : "http://localhost:3000");
 
-const title = `${siteConfig.name}: Hoot taps you when Claude Code is done`;
+const title = `${siteConfig.name}: give your terminal a forest`;
 const description =
-  "A menu-bar Mac app. Hoot pops up when Claude Code finishes or needs your OK, then gets out of the way.";
+  "A Mac app that puts a pixel scene, or your own photo, behind Claude Code, and Hoot the owl to tap you when it finishes or needs your OK.";
 export const metadata: Metadata = {
   metadataBase,
   title,
