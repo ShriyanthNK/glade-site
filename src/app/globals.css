@@ -29,6 +29,7 @@
   --color-blush: var(--blush);
   --font-display: var(--font-bricolage);
   --font-mono: var(--font-jetbrains);
+  --font-pixel: var(--font-pixelify);
 }
 
 html { background: var(--ink); color: var(--paper); }

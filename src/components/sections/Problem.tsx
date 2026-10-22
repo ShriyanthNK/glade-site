@@ -5,8 +5,8 @@ export function Problem() {
         You tab away. Claude stops and asks.
       </h2>
       <p className="max-w-md text-lg text-paper/80">
-        A permission prompt sits there for ten minutes while you read something else.
-        Hoot taps you when it happens, tells you what Claude wants, and tries again if you keep ignoring it.
+        A permission prompt can sit there for a long time while you read something else.
+        Hoot taps you when Claude stops, tells you what it wants, and gets more insistent if you keep ignoring it.
       </p>
     </section>
   );

@@ -28,7 +28,7 @@ export function HowItWorks() {
       <div className="mt-24 grid gap-8 md:grid-cols-[1fr_1.6fr] md:gap-16">
         <div>
           <h3 className="text-3xl font-extrabold tracking-tight">Prefer the command line?</h3>
-          <p className="mt-3 max-w-sm text-paper/80">Everything in the window is also a <code className="bg-ink/85 px-1 font-mono font-bold text-sprout">glade</code> command.</p>
+          <p className="mt-3 max-w-sm text-paper/80">Many things in the window are also <code className="bg-ink/85 px-1 font-mono font-bold text-sprout">glade</code> commands.</p>
         </div>
         <dl className="divide-y-4 divide-outline border-4 border-outline bg-surface">
           {CONTROLS.map(([cmd, what]) => (

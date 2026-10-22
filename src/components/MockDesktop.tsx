@@ -113,7 +113,7 @@ export function MockDesktop() {
       <button
         type="button"
         onClick={() => { setPhase("working"); setShown(0); setHootPhase("enter"); setRun((r) => r + 1); }}
-        className="absolute bottom-4 left-4 motion-reduce:hidden border-4 border-paper/70 bg-ink/60 px-3 py-1 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
+        className="absolute bottom-4 left-4 motion-reduce:hidden min-h-11 border-4 border-paper/70 bg-ink/60 px-3 font-mono text-xs font-extrabold text-paper hover:bg-paper hover:text-outline"
       >
         Replay
       </button>

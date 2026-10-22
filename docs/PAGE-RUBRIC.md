@@ -15,3 +15,7 @@ Scored by a reviewer who sees only screenshots of each section at desktop (d-NN.
 7. **Visual identity.** Consistent pixel-art style (palette, square cards, the owl), the scene backdrop supports rather
    than fights the text; Hoot is the memorable element.
 8. **Motion and states.** Based on what a screenshot can show: the hero demo reads, mood states are clear.
+9. **Motion graphic.** The scenes animation (frames in motion-contact.jpg, a 9 s loop) explains the idea without
+   narration: picture, pixel art, readable terminal, Hoot's tap. It must not be the only place the information lives
+   (the page also says it in text), it needs a visible pause control and a still poster under reduced motion, and it
+   should look like the same product as the rest of the page (palette, fonts, Hoot).

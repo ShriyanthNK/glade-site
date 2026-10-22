@@ -12,10 +12,10 @@ export function StatusLine() {
         <h2 className="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">Hoot in your status line.</h2>
         <p className="mt-5 max-w-md text-lg text-paper/80">
           Optional. Hoot&apos;s mood follows how full Claude&apos;s context window is, so you see it coming.
-          If you already have a status line, {siteConfig.name} asks first and puts yours back when you turn Hoot&apos;s off.
+          If you already have a status line, {siteConfig.name} won&apos;t replace it unless you say so, and puts yours back when you remove Hoot&apos;s.
         </p>
       </div>
-      <div className="min-w-0 border-4 border-outline bg-ink/90 p-5 font-mono text-[11px] leading-6 shadow-[8px_8px_0_rgba(0,0,0,.35)] sm:text-sm"
+      <div className="min-w-0 border-4 border-outline bg-ink/90 p-5 font-mono text-xs leading-6 shadow-[8px_8px_0_rgba(0,0,0,.35)] sm:text-sm"
            role="img" aria-label="Three status lines: Hoot calm at 12 percent, impatient at 70 percent, worried at 92 percent">
         {LINES.map(([face, word, bar, color, note], i) => (
           <div key={face} className={i ? "mt-4" : ""}>

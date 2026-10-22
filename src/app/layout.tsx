@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono, Pixelify_Sans } from "next/font/google";
 import { siteConfig } from "../../site.config";
 import { Backdrop } from "@/components/Backdrop";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["500", "800"], variable: "--font-jetbrains" });
+// Small pixel-style labels and buttons; headlines and body stay in Bricolage Grotesque.
+const pixel = Pixelify_Sans({ subsets: ["latin"], weight: ["700"], variable: "--font-pixelify" });
 
 // Vercel exposes its own system variables at build time; no variable needs to be set by hand.
 // The share image comes from src/app/opengraph-image.png and twitter-image.png (scripts/make-og.mjs).
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${mono.variable} ${pixel.variable}`}>
       <body>
         <Backdrop />
         {children}

@@ -9,7 +9,7 @@ export function FinalCta() {
           <h2 className="max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
             Go make something. Hoot will tell you when Claude&apos;s done.
           </h2>
-          <a href={siteConfig.downloadUrl} className="mt-8 inline-block bg-sparkle px-6 py-3 text-lg font-bold text-outline">
+          <a href={siteConfig.downloadUrl} className="mt-8 inline-block bg-sparkle px-6 py-3 font-pixel text-2xl font-bold text-outline">
             Download for Mac
           </a>
         </div>

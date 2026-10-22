@@ -32,3 +32,10 @@ Evidence paths are in the glade app repo (`github.com/ShriyanthNK/glade`) unless
 | Commands: `glade open looks`, `glade look add PHOTO`, `glade snooze MINUTES` (also forever, clear), `glade statusline install` | `Sources/Glade/main.swift` usage text |
 | Photos are read with the system's image decoder (JPEG, PNG, HEIC and the other formats macOS supports) | `LookPipeline.load` (ImageIO) |
 | Glade's own code has no networking, so it cannot upload a photo | grep of `Sources/`; public source |
+| The status line shows Hoot's face and mood word, the model name, the project folder and a context bar with a percentage | `StatusLine.swift` script |
+| Glade does not replace an existing status line unless you choose to; it keeps the old one and restores it when Hoot's is removed | `StatusLineInstaller`, `StatusLineTests` |
+| Glade's source is public on GitHub | `github.com/ShriyanthNK/glade` |
+| Alerts get more insistent the longer Claude waits (waiting, annoyed, angry) | `Views.swift` tiers |
+| You can choose the font and size (10 to 24 pt) for Glade terminals: any installed monospaced font, with a live preview; JetBrains Mono can be installed with one click into your own Fonts folder, and uninstalling removes only what Glade added | `TerminalFonts.swift`, `TerminalFontCard.swift`, `TerminalFontsTests` |
+| The app and this page are set in Bricolage Grotesque, Pixelify Sans and JetBrains Mono (open fonts, SIL OFL) | `Resources/Fonts` with license texts; `BrandFontsTests` |
+| The scenes animation shows a generated sample picture (not a real photo) going through the app's real look pipeline | `motion/looks/tools/make-assets.mjs` (final stage is `glade look add --out`) |

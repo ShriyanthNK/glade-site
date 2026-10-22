@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[{"id":"brand","type":"string","label":"Product name","default":"Glade"},{"id":"project","type":"string","label":"Project name in the terminal and bubble","default":"my-project"}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Glade's tokens: plum ground, cream ink, one yellow accent. */
+      :root {
+        --ground: #1f1320;
+        --ink: #2a1a26;
+        --outline: #3b2230;
+        --paper: #fff4dc;
+        --sparkle: #ffd23f;
+        --teal: #2ba89a;
+        --sprout: #5dc46a;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: absolute; inset: 0; background: var(--ground); }
+    </style>
+  </head>
+  <body>
+    <!-- 9 s loop: a picture becomes a Glade look, text stays readable on it, then Hoot taps you. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9" data-width="1920" data-height="1080">
+      <div id="stage" class="clip" data-composition-id="stage" data-composition-src="compositions/stage.html"
+           data-start="0" data-duration="9" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="captions" class="clip" data-composition-id="captions" data-composition-src="compositions/captions.html"
+           data-start="0" data-duration="9" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="hoot" class="clip" data-composition-id="hoot" data-composition-src="compositions/hoot.html"
+           data-start="0" data-duration="9" data-track-index="3" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

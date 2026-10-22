@@ -1,0 +1,26 @@
+<template>
+  <style>
+    @font-face { font-family: "Bricolage"; src: url("assets/fonts/bricolage-grotesque-latin.woff2") format("woff2"); font-weight: 200 800; }
+    #root { position: absolute; inset: 0; }
+    .cap { position: absolute; left: 248px; top: 140px; display: flex; align-items: stretch; opacity: 0;
+      background: #fff4dc; color: #3b2230; border: 6px solid #3b2230; box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.4); }
+    .cap b { display: grid; place-items: center; min-width: 76px; background: #2ba89a; color: #3b2230; font: 800 44px "Bricolage", sans-serif; }
+    .cap span { padding: 16px 28px; font: 800 44px/1.1 "Bricolage", sans-serif; letter-spacing: -0.01em; }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
+    <div class="cap" id="caps-1"><b>1</b><span>Drop in a picture</span></div>
+    <div class="cap" id="caps-2"><b>2</b><span><span data-var-text="brand">Glade</span> turns it into pixel art</span></div>
+    <div class="cap" id="caps-3"><b>3</b><span>Your text stays readable</span></div>
+    <div class="cap" id="caps-4"><b>4</b><span>Hoot taps you when Claude is done</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // each caption: a short slide-fade in, a hold, a short fade out (chrome timings 200 / 150 ms)
+    const caps = [["#caps-1", 0.5, 1.5], ["#caps-2", 1.6, 3.0], ["#caps-3", 3.2, 5.4], ["#caps-4", 5.6, 8.4]];
+    for (const [sel, a, b] of caps) {
+      tl.fromTo(sel, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, a);
+      tl.to(sel, { opacity: 0, duration: 0.15, ease: "power2.in" }, b);
+    }
+    window.__timelines["captions"] = tl;
+  </script>
+</template>

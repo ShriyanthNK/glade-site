@@ -1,3 +1,4 @@
+import { MotionLoop } from "../MotionLoop";
 import { siteConfig } from "../../../site.config";
 const BACKDROP = { backgroundImage: "url(/backdrop.png)", backgroundSize: "cover", backgroundPosition: "bottom", imageRendering: "pixelated" as const };
 
@@ -43,10 +44,16 @@ export function Looks() {
         <h2 className="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">A scene behind your terminal.</h2>
         <p className="max-w-xl text-lg text-paper/80">
           {siteConfig.name} opens Terminal.app in Hoot&apos;s colors with a see-through background and puts a scene behind it.
-          Pick the built-in Night Forest, or make a look from one of your own photos.
+          Pick the built-in Night Forest, or make a look from one of your own photos. Choose your terminal font and size too.
         </p>
       </div>
-      <div className="mt-12"><LooksMock /></div>
+      <div className="mt-12">
+        <MotionLoop
+          src="/motion/looks.mp4"
+          poster="/motion/looks-poster.jpg"
+          label="A picture of a sunset turns into pixel art, a terminal sits on it with readable text, then Hoot the owl pops up saying Claude is done."
+        />
+      </div>
       <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-12">
         {STEPS.map(([title, body], i) => (
           <li key={title} className="border-t-4 border-sparkle pt-5">
@@ -56,6 +63,8 @@ export function Looks() {
           </li>
         ))}
       </ol>
+      <h3 className="mt-24 text-2xl font-extrabold tracking-tight">In the app</h3>
+      <div className="mt-6"><LooksMock /></div>
     </section>
   );
 }

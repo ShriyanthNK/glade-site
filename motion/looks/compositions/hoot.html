@@ -1,0 +1,51 @@
+<template>
+  <style>
+    @font-face { font-family: "JB"; src: url("assets/fonts/jetbrains-mono-latin.woff2") format("woff2"); font-weight: 100 800; }
+    #root { position: absolute; inset: 0; }
+    #hoot-wrap { position: absolute; left: 1196px; top: 410px; width: 480px; height: 500px; opacity: 0; }
+    #hoot-bubble { position: absolute; left: 0; top: 0; width: 480px; padding: 22px 28px 24px; background: #fff4dc; color: #3b2230; border: 6px solid #3b2230;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.4); transform-origin: 50% 100%; opacity: 0; }
+    #hoot-bubble p { font: 800 32px/1.15 "JB", monospace; }
+    #hoot-bubble em { display: inline-block; margin-top: 14px; padding: 6px 16px; background: #2ba89a; color: #3b2230; font: 800 28px "JB", monospace; font-style: normal; }
+    #hoot-tail { position: absolute; left: 228px; top: 168px; width: 24px; height: 24px; background: #3b2230; opacity: 0; }
+    #hoot-body { position: absolute; left: 80px; top: 150px; width: 400px; height: 400px; }
+    #hoot-body img { position: absolute; inset: 0; width: 400px; height: 400px; image-rendering: pixelated; opacity: 0; }
+    .spark { position: absolute; width: 28px; height: 28px; opacity: 0; }
+    .spark::before, .spark::after { content: ""; position: absolute; background: #ffd23f; }
+    .spark::before { left: 10px; top: 0; width: 8px; height: 28px; }
+    .spark::after { left: 0; top: 10px; width: 28px; height: 8px; }
+  </style>
+  <div id="root" data-composition-id="hoot" data-width="1920" data-height="1080">
+    <div id="hoot-wrap">
+      <div id="hoot-bubble"><p>CLAUDE'S DONE, YOUR TURN</p><em>&gt; <span data-var-text="project">my-project</span></em></div>
+      <div id="hoot-tail"></div>
+      <div id="hoot-body">
+        <img id="hoot-f0" src="assets/hoot-0.png" alt="" />
+        <img id="hoot-f1" src="assets/hoot-1.png" alt="" />
+        <img id="hoot-f2" src="assets/hoot-2.png" alt="" />
+        <img id="hoot-f3" src="assets/hoot-3.png" alt="" />
+      </div>
+      <div class="spark" id="hoot-s1" style="left:56px;top:250px"></div>
+      <div class="spark" id="hoot-s2" style="left:446px;top:300px"></div>
+      <div class="spark" id="hoot-s3" style="left:30px;top:420px"></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Hoot rises from below the window edge, the bubble pops from its tail, then a four-frame wave
+    tl.set("#hoot-wrap", { opacity: 1 }, 5.6);
+    tl.fromTo("#hoot-body", { y: 520 }, { y: 0, duration: 0.5, ease: "back.out(1.3)" }, 5.6);
+    tl.fromTo("#hoot-bubble", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 6.05);
+    tl.fromTo("#hoot-tail", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "power2.out" }, 6.2);
+    const frames = ["#hoot-f0", "#hoot-f1", "#hoot-f2", "#hoot-f3"];
+    frames.forEach((f) => tl.set(f, { opacity: 0 }, 0));
+    for (let t = 5.6, k = 0; t < 8.6; t += 0.25, k++) { frames.forEach((f, i) => tl.set(f, { opacity: i === k % 4 ? 1 : 0 }, t)); }
+    [["#hoot-s1", 6.3], ["#hoot-s2", 6.5], ["#hoot-s3", 6.7]].forEach(([s, at]) => {
+      tl.fromTo(s, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.15, ease: "power2.out" }, at);
+      tl.to(s, { opacity: 0.2, duration: 0.3, ease: "power1.inOut" }, at + 0.4);
+      tl.to(s, { opacity: 1, duration: 0.3, ease: "power1.inOut" }, at + 0.7);
+    });
+    tl.to("#hoot-wrap", { opacity: 0, duration: 0.35, ease: "power2.in" }, 8.6);
+    window.__timelines["hoot"] = tl;
+  </script>
+</template>
